@@ -1,10 +1,6 @@
 const mongoose = require('mongoose')
 
 const alunosSchema = new mongoose.Schema({
-    id : {
-        type: String,
-        required: true
-    },
     matricula: {
         type: String,
         required: true

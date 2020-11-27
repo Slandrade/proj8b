@@ -26,7 +26,9 @@ router.post('/', async (req, res) => {
 
     const aluno = new Aluno({
         nomeCompleto: req.body.nomeCompleto,
-        matricula: req.body.matricula
+        matricula: req.body.matricula,
+        Curso: req.body.Curso,
+        anoSemestreDeEntrada: req.body.anoSemestreDeEntrada
     })
 
     try {
@@ -46,6 +48,14 @@ router.patch('/:id', getAluno, async (req, res) => {
 
     if (req.body.matricula != null) {
         res.aluno.matricula = req.body.matricula
+    }
+
+    if (req.body.Curso != null) {
+        res.aluno.Curso = req.body.Curso
+    }
+
+    if (req.body.anoSemestreDeEntrada != null) {
+        res.aluno.anoSemestreDeEntrada = req.body.anoSemestreDeEntrada
     }
 
     try {
@@ -75,7 +85,7 @@ async function getAluno(req, res, next) {
         aluno = await Aluno.findById(req.params.id)
 
         if (aluno == null) {
-            return res.status(404).json({message: 'Aluno not found'})
+            return res.status(404).json({message: 'Aluno não encontrado'})
         }
     }catch (err) {
         res.status(500).json({message: err.message})
@@ -86,5 +96,4 @@ async function getAluno(req, res, next) {
     next()
 }
 
-// export
 module.exports = router

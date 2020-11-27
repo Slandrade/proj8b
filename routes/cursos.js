@@ -26,7 +26,9 @@ router.post('/', async (req, res) => {
 
     const curso = new Curso({
         nome: req.body.nome,
-        area: req.body.area
+        area: req.body.area,
+        regime: req.body.regime,
+        numeroDeSemestres: req.body.numeroDeSemestres
     })
 
     try {
@@ -46,6 +48,14 @@ router.patch('/:id', getCurso, async (req, res) => {
 
     if (req.body.area != null) {
         res.curso.area = req.body.area
+    }
+
+    if (req.body.regime != null) {
+        res.curso.regime = req.body.regime
+    }
+
+    if (req.body.numeroDeSemestres != null) {
+        res.curso.numeroDeSemestres = req.body.numeroDeSemestres
     }
 
     try {
@@ -75,7 +85,7 @@ async function getCurso(req, res, next) {
         curso = await Curso.findById(req.params.id)
 
         if (curso == null) {
-            return res.status(404).json({message: 'Curso not found'})
+            return res.status(404).json({message: 'Curso não encontrado'})
         }
     }catch (err) {
         res.status(500).json({message: err.message})
@@ -86,5 +96,4 @@ async function getCurso(req, res, next) {
     next()
 }
 
-// export
 module.exports = router

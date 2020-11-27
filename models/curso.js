@@ -1,10 +1,6 @@
 const mongoose = require('mongoose')
 
 const cursosSchema = new mongoose.Schema({
-    id : {
-        type: String,
-        required: true
-    },
     area: {
         type: String,
         required: true
